@@ -1,3 +1,5 @@
+Version: 2
+
 os: linux
 dist: focal
 group: edge
@@ -41,6 +43,17 @@ jobs:
     - export version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
     - cp $HOME/twrp/out/target/product/S24/recovery.img $HOME/twrp/TWRP-$version-S24-$(date +"%Y%m%d")-Unofficial.img
     - cd $HOME/twrp/
+
+  steps:
+    - run:
+        name: Creating Dummy Artifacts
+        command: |
+          echo "my artifact files in a dir" > $HOME/twrp/out/target/product/;
+          
+    - store_artifacts:
+        path: $HOME/twrp/out/target/product/
+
+    
   deploy:
     provider: releases
     token: $GitOAUTHToken
@@ -57,3 +70,4 @@ jobs:
     except:
       - /^(?i:untagged)-.*$/
       - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    
