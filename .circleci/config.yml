@@ -21,8 +21,8 @@ before_install:
 before_script:
   - cd $HOME && mkdir twrp
   - TWRP_SOURCE="https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp/"
-  repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
-  repo sync
+  - repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-11
+  - repo sync
 script:
   - cd $HOME/twrp/ && git clone https://github.com/MCFDev/twrp_omni_S24 device/Omni/S24
   - rm -rf bootable/recovery && git clone https://github.com/omnirom/android_bootable_recovery -b android-11.0 --depth 1 bootable/recovery
